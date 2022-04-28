@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://unpkg.com/three@0.138.0/build/three.module.js",
+				"OrbitControls": "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js",
+				"dat.gui": "https://unpkg.com/dat.gui@0.7.6/build/dat.gui.module.js",
+				"three.interactive": "https://cdn.jsdelivr.net/npm/three.interactive@1.3.0/build/three.interactive.js"
+			}
+		}
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/16/Stats.js"></script>
+</head>
+
+<body>
+
+	<canvas id="canvas"></canvas>
+
+	<button type="button" id="box">Box</button>
+	<button type="button" id="cylinder">Cylinder</button>
+	<button type="button" id="cone">Cone</button>
+	<button type="button" id="torus">Torus</button>
+	<button type="button" id="room">Room</button>
+	<button type="button" id="plane">Plane</button>
+	<button type="button" id="clear">Clear</button>
+
+	<label for="background">Background:</label>
+	<select name="background" id="background">
+    <option value="white" style="background-color:white">&nbsp;&nbsp;&nbsp;</option>
+    <option value="silver" style="background-color:silver"></option>
+    <option value="gray" style="background-color:gray"></option>
+    <option value="black" style="background-color:black"></option>
+		<option value="red" style="background-color:red"></option>
+		<option value="maroon" style="background-color:maroon"></option>
+		<option value="yellow" style="background-color:yellow"></option>
+		<option value="olive" style="background-color:olive"></option>
+		<option value="lime" style="background-color:lime"></option>
+		<option value="green" style="background-color:green"></option>
+		<option value="aqua" style="background-color:aqua"></option>
+		<option value="teal" style="background-color:teal"></option>
+		<option value="blue" style="background-color:blue"></option>
+		<option value="navy" style="background-color:navy"></option>
+		<option value="fuchsia" style="background-color:fuchsia"></option>
+		<option value="purple" style="background-color:purple"></option>
+  </select>
+
+	<span id="objects">Objects: 0</span>
+
+	<script defer type="module" src="main.js"></script>
+</body>
