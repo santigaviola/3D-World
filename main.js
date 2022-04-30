@@ -95,6 +95,7 @@ const interactionManager = new InteractionManager(
 
 let sceneArray = [];
 let animationArray =[];
+document.getElementById("objects").innerHTML = "Objects: " + scene.children.length;
 
 //________________________________________________ Scene Add
 
@@ -227,7 +228,7 @@ const createCone = () => {
 
 };
 
-//________________________________________________ Cone
+//________________________________________________ Torus
 
 const createTorus = () => {
 
@@ -296,39 +297,44 @@ const createRoom = ( x, y, z, t ) => {
 
 //________________________________________________ Box
 
+const planeButton = document.getElementById("plane");
+planeButton.addEventListener("click", (event) => { sceneAdd(createPlane() ) } );
+
+//________________________________________________ Box
+
 const boxButton = document.getElementById("box");
-boxButton.addEventListener("click", (event) => { sceneAdd(createBox( 1, 1, 1 ) ); });
+boxButton.addEventListener("click", (event) => { sceneAdd(createBox( 1, 1, 1 ) ) } );
 
 //________________________________________________ Cylinder
 
 const cylinderButton = document.getElementById("cylinder");
-cylinderButton.addEventListener("click", (event) => { sceneAdd(createCylinder()); });
+cylinderButton.addEventListener("click", (event) => { sceneAdd(createCylinder() ) } );
 
 //________________________________________________ Cone
 
 const coneButton = document.getElementById("cone");
-coneButton.addEventListener("click", (event) => { sceneAdd(createCone()); });
+coneButton.addEventListener("click", (event) => { sceneAdd(createCone() ) } );
 
 //________________________________________________ Torus
 
 const torusButton = document.getElementById("torus");
-torusButton.addEventListener("click", (event) => { sceneAdd(createTorus()); });
+torusButton.addEventListener("click", (event) => { sceneAdd(createTorus() ) } );
 
-//________________________________________________ Clear
+//________________________________________________ Room
 
 const buttonRoom = document.getElementById("room");
-buttonRoom.addEventListener("click", (event) => { sceneAdd(createRoom(10, 10, 10, 0.5)); });
+buttonRoom.addEventListener("click", (event) => { sceneAdd(createRoom(10, 10, 10, 0.5) ) } );
 
 //________________________________________________ Clear
 
 const buttonClear = document.getElementById("clear");
-buttonClear.addEventListener("click", (event) => { sceneClear(); });
+buttonClear.addEventListener("click", (event) => { sceneClear() } );
 
 //________________________________________________ Background
 
 const selectBackground = document.getElementById("background");
 selectBackground.addEventListener("change", (event) => {
-  scene.background = colors[event.target.value];
+  scene.background = colors[event.target.value]
 });
 
 //__________________________________________________________________________________________________ Animate
