@@ -5,6 +5,19 @@ import { OrbitControls } from 'OrbitControls';
 import { GUI } from 'dat.gui';
 import { InteractionManager } from "three.interactive";
 
+import { colors, randomColor } from "./colors.js";
+
+import {
+  createAmbientLight,
+  createPointLight,
+  createPlane,
+  createBox,
+  createCylinder,
+  createCone,
+  createTorus,
+  createRoom
+} from "./creators.js";
+
 //__________________________________________________________________________________________________ Stats
 
 const stats0 = new Stats();
@@ -21,42 +34,6 @@ const stats2 = new Stats();
 stats2.showPanel(2);
 stats2.domElement.style.cssText = 'float: right';
 document.body.appendChild( stats2.dom );
-
-//__________________________________________________________________________________________________ Colors
-
-const colors = {
-  white: new THREE.Color( 0xFFFFFF ),
-  silver: new THREE.Color( 0xC0C0C0 ),
-  gray: new THREE.Color( 0x808080 ),
-  black: new THREE.Color( 0x000000 ),
-  red: new THREE.Color( 0xFF0000 ),
-  maroon: new THREE.Color( 0x800000 ),
-  yellow: new THREE.Color( 0xFFFF00 ),
-  olive: new THREE.Color( 0x808000 ),
-  lime: new THREE.Color( 0x00FF00 ),
-  green: new THREE.Color( 0x008000 ),
-  aqua: new THREE.Color( 0x00FFFF ),
-  teal: new THREE.Color( 0x008080 ),
-  blue: new THREE.Color( 0x0000FF ),
-  navy: new THREE.Color( 0x000080 ),
-  fuchsia: new THREE.Color( 0xFF00FF ),
-  purple: new THREE.Color( 0x800080 )
-};
-
-const randomColor = () => {
-  const colorsArray = [];
-  colorsArray.push(
-    colors.red,
-    colors.yellow,
-    colors.lime,
-    colors.aqua,
-    colors.teal,
-    colors.blue,
-    colors.fuchsia
-  );
-  const color = colorsArray[Math.floor(Math.random() * colorsArray.length)];
-  return color;
-};
 
 //__________________________________________________________________________________________________ Scene
 
@@ -135,163 +112,9 @@ const sceneClear = () => {
 
 };
 
-
-
-//__________________________________________________________________________________________________ Creators
-
-//________________________________________________ Light
-
-const createAmbientLight = () => {
-
-  const light = new THREE.AmbientLight( colors.white );
-
-  return light;
-
-};
-
-const createPointLight = ( x, y, z ) => {
-
-  const light = new THREE.PointLight(0xFFFFFF);
-  light.position.set( x, y, z );
-
-  return light;
-
-};
+//__________________________________________________________________________________________________ Scene init
 
 scene.add( createAmbientLight() );
-
-
-
-//________________________________________________ Material
-
-const createMaterial = () => {
-
-  const material = new THREE.MeshPhongMaterial({
-    color: randomColor(),
-    transparent: true,
-    opacity: 0.3
-  });
-
-  return material;
-
-};
-
-//________________________________________________ Plane
-
-const createPlane = () => {
-
-  const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry( 1, 1 ),
-    new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} )
-  );
-
-  return plane;
-
-};
-
-//________________________________________________ Box
-
-const createBox = ( x, y, z ) => {
-
-  const box = new THREE.Mesh(
-    new THREE.BoxGeometry( x, y, z ),
-    createMaterial()
-  );
-
-  return box;
-
-};
-
-//________________________________________________ Cylinder
-
-const createCylinder = () => {
-
-  const cylinder = new THREE.Mesh(
-    new THREE.CylinderGeometry( 0.5, 0.5, 1, 32 ),
-    createMaterial()
-  );
-
-  return cylinder;
-
-};
-
-//________________________________________________ Cone
-
-const createCone = () => {
-
-  const cone = new THREE.Mesh(
-    new THREE.ConeGeometry( 0.5, 1, 32 ),
-    createMaterial()
-  );
-
-  return cone;
-
-};
-
-//________________________________________________ Torus
-
-const createTorus = () => {
-
-  const torus = new THREE.Mesh(
-    new THREE.TorusGeometry( 0.5, 0.2, 12, 45 ),
-    createMaterial()
-  );
-
-  return torus;
-
-};
-
-//________________________________________________ Room
-
-const createRoom = ( x, y, z, t ) => {
-
-  const floor = new THREE.Mesh(
-    new THREE.BoxGeometry( x + t * 2, t, y + t * 2 ),
-    createMaterial()
-  );
-  floor.position.y -= z / 2 + t / 2;
-
-  const roof = new THREE.Mesh(
-    new THREE.BoxGeometry( x + t * 2, t, y + t * 2 ),
-    createMaterial()
-  );
-  roof.position.y += z / 2 + t / 2;
-
-  const frontWall = new THREE.Mesh(
-    new THREE.BoxGeometry( x + t * 2, z, t ),
-    createMaterial()
-  );
-  frontWall.position.z -= y / 2 + t / 2;
-
-  const backWall = new THREE.Mesh(
-    new THREE.BoxGeometry( x + t * 2, z, t ),
-    createMaterial()
-  );
-  backWall.position.z += y / 2 + t / 2;
-
-  const rightWall = new THREE.Mesh(
-    new THREE.BoxGeometry( t, z, y ),
-    createMaterial()
-  );
-  rightWall.position.x += y / 2 + t / 2;
-
-  const leftWall = new THREE.Mesh(
-    new THREE.BoxGeometry( t, z, y ),
-    createMaterial()
-  );
-  leftWall.position.x -= y / 2 + t / 2;
-
-  const room = new THREE.Group();
-  room.add( floor );
-  room.add( frontWall );
-  room.add( backWall );
-  room.add( rightWall );
-  room.add( leftWall );
-  room.add( roof );
-
-  return room;
-
-};
 
 //__________________________________________________________________________________________________ Event Listeners
 
